@@ -1,0 +1,25 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/selFlag/selFlag"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#A9C1C6",
+    "navigationBarTitleText": "2019新年flag",
+    "navigationBarTextStyle":"white"
+  },
+  "navigateToMiniProgramAppIdList": [
+    "wx0cc0a7af11f01469",
+    "wx6bfde419476cc268",
+    "wx2e8dd2519285ff3e",
+    "wx2661b6e1425789fa",
+    "wxba8a9e3c234404fb",
+    "wxd74ed709ec1dfa9e",
+    "wx5e63508aa8c62a74",
+    "wxa29f6fa4f872c3e3",
+    "wx9c43cbf9581d1e90",
+    "wxa344448166586158"
+  ]
+}

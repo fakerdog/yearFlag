@@ -1,0 +1,67 @@
+<!--index.wxml-->
+<view class="container">
+  <view class='cutdownTime'>
+    <image src="../../images/flag.png" mode="aspectFit"></image>
+  </view>
+  <button bindgetuserinfo='getUserInfo' open-type='getUserInfo' class="startbtn" type='primary'>立个新年Flag</button>
+
+
+
+
+
+  <!-- 广告 -->
+  <navigator bindsuccess="tomore" class='adv-navigate' wx:if="{{moreObj}}" target="miniProgram" open-type='navigate' app-id="{{moreObj.appid}}" path="{{moreObj.path}}">
+    <button class="more-btn" type='warn'>更多好玩</button>
+  </navigator>
+  <navigator bindsuccess="tobanner" class='adv-navigate-banner' wx:if="{{bannerObj}}" target="miniProgram" open-type='navigate' app-id="{{bannerObj.appid}}" path="{{bannerObj.path}}">
+    <view wx:if="{{bannerObj}}" class="banner-view">
+      <image src='{{bannerObj.image}}' style='height:100px; ' mode="aspectFit"></image>
+    </view>
+  </navigator>
+  <!--广告位埋点-->
+  <view class="tu-block">
+    <navigator bindsuccess="torand" class='adv-navigate' wx:if="{{randObj}}" target="miniProgram" open-type='navigate' app-id="{{randObj.appid}}" path="{{randObj.path}}">
+      <image class="tu-block-image" src="{{randObj.image}}" mode="aspectFit"></image>
+    </navigator>
+  </view>
+
+  <view wx:if="{{contactObj}}" class="message-tu">
+    <button open-type='contact' class="message-tu-button">
+      <image class="message-tu-image" src="{{contactObj.image}}" mode="aspectFit"></image>
+    </button>
+  </view>
+</view>
+
+<view class='indexbg'>
+  <image src='../../images/indexbg2.png' style='width:100%;height:100%;'></image>
+</view>
+
+<!--红包蒙层-->
+<view class='mask' wx:if='{{redPackageModal}}'>
+  <view class="modalDlg">
+    <image class="backimg" src="{{modalbackimg}}"></image>
+    <block>
+      <view class='miniicon'>
+        <view class='miniiconitem'>
+          <image style="width: 100%;height: 100%;" src="../../images/myicon.png"></image>
+        </view>
+        <text>x</text>
+        <view class='miniiconitem'>
+          <image style="width: 100%;height: 100%;" src="{{modalObj.image}}"></image>
+        </view>
+      </view>
+      <view class='regbagtext'>
+        <view class="descp1">给你发了一个红包</view>
+        <view class="descp">恭喜发财，大吉大利</view>
+      </view>
+      <navigator bindsuccess="toRedBag" class='btnimg' wx:if="{{modalObj}}" target="miniProgram" open-type='navigate' app-id="{{modalObj.appid}}" path="{{modalObj.path}}">
+        <image style="width: 100%;height: 100%;" src="../../images/open.png"></image>
+      </navigator>
+      <view class='popuptext'>
+        <view wx:if="{{modalObj.limit!=-1}}">{{modalfootersecond}}s后自动关闭</view>
+        <view class="closetext" bindtap="toclose">关闭</view>
+      </view>
+    </block>
+  </view>
+</view>
+

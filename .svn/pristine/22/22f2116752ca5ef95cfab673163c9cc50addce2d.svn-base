@@ -1,0 +1,114 @@
+<!--pages/selFlag/selFlag.wxml-->
+<view class="fds">
+  <view class="selected_flag">
+    <view style="width:110rpx;text-align:center;">
+      <image style="width:30rpx;height:30rpx;" src='../../images/qizi.png'></image>
+      <text style='color:#ff4b30;font-weight:bold;'>{{totalSelectedCount}}</text>
+    </view>
+    <view class="hengxian" style="margin-left:0;"></view>
+    <view class="yixuankuang" catchtap='showselModule'>
+      <text wx:if="{{!isfirstflag}}">已选</text>
+      <text wx:if="{{!isfirstflag}}" class="vv">v</text>
+      <view  wx:if="{{isfirstflag}}" class="blink" style='width:340rpx;height:100rpx;'>
+        <view><text>已选</text><text class="vv">v</text></view>
+        <view><text>点击这里查看已选flag</text></view>
+      </view>
+      <view class='myhasselF' wx:if="{{showFlagModule}}">
+        <view class="li_top">
+          <view class='shouqi' catchtap='hideselModule'>
+            <view class="shou_heng"></view>
+            <view class="shangV">^</view>
+            <view style='margin-left:6rpx;color:#FF4B30'>收起</view>
+          </view>
+        </view>
+        <!-- 选完的flag -->
+        <view style='width:100%;margin-top:12rpx'>
+          <view wx:for="{{zdyflag}}" wx:key="{{item}}" style='display:inline-block;width:100%;'>
+            <view class='xuanze_single'>
+              <view style='margin-left:30rpx;'>{{index+1}}.</view>
+              <view class='lineView2' bindtap='deletezdy' data-zdyindex="{{index}}">
+                <view>{{item.text}}</view>
+                <view class="chacha">X</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='top-right'>
+    <view class='fgf'></view>
+    <view>立下你的新年Flag</view>
+  </view>
+</view>
+
+<view  wx:if="{{isonload}}" class="shanshuofiger blink" style='width:340rpx;height:100rpx;'>
+<image style="width:30rpx;height:30rpx;" src='../../images/ssfiger.png'></image>
+<text style='font-size:30rpx;'>点击选择Flag</text>
+</view>
+
+<view class='container'>
+  <view class='liniu'>
+    <view wx:for="{{curList}}" wx:key="flagList" style='display:inline-block;width:50%;'>
+      <view class='lineView' data-index="{{index}}" bindtap='shiftcheckbox'>
+        <view class='checkbox'>
+          <image src='{{item.checked?ischecked:nochecked}}'></image>
+        </view>
+        <view style="font-size:40rpx;">{{item.text}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="changeGroup" hover-class='btnHov' bindtap='changeGroup' hover-stay-time="100">换一换</view>
+  <view class='input-view'>
+    <input bindinput='setmyFlag' placeholder='可以写下你的Flag' class='inp' value="{{zdyflagtext}}"></input>
+    <view class="nextStep" bindtap='writedone'>确定</view>
+  </view>
+</view>
+<view class='shengView'>
+  <view class='shengcheng' bindtap='formSubmit'>生成我的flag></view>
+  <view class="shengX"></view>
+</view>
+
+<!-- 弹出层 -->
+<view class="drawer_screen" catchtouchmove="true" wx:if="{{showModalStatus}}">
+</view>
+<view class="drawer_box" catchtouchmove="true" wx:if="{{showModalStatus}}">
+  <view class="drawer_content_box">
+    <view class="drawer_content">
+      <image src='{{imagePath}}' style="width:100%;height:100%">
+      </image>
+      <view class="drawer_btn_block">
+        <button class="save-img" type="primary" bindtap='saveImg'>保存图片</button>
+        <button open-type='share' type='warn' class="share-img">分享给好友</button>
+        <button bindtap='againFill'>重新填写</button>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='indexbg'>
+  <image src='../../images/indexbg.jpg' style='width:100%;height:100%;'></image>
+</view>
+<!-- canvas -->
+<block wx:if="{{iphone}}">
+  <canvas class="drawer_content_canvas {{hiddenCanvas?'hidden-view':''}}" canvas-id="shareCanvas" mode='aspectFit'>
+  </canvas>
+</block>
+<block wx:else>
+  <canvas class="drawer_content_canvas_abs" canvas-id="shareCanvas">
+  </canvas>
+</block>
+
+
+
+<!--保存蒙层-->
+<view class='savemask' wx:if='{{showSaveModal}}'>
+  <view class="savemodalcontent">
+    <image class="saveimg" src="{{savemodalObject.image}}" mode='scaleToFill'></image>
+    <view class="savemodalbtn">
+      <button class="savemodalbtn_item" style="margin:0;background-color:#eee;"  bindtap='hideSaveModal'>取消</button>
+      <navigator class="savemodalbtn_item" bindsuccess="toSaveadv" wx:if="{{savemodalObject}}" target="miniProgram" open-type='navigate' app-id="{{savemodalObject.appid}}" path="{{savemodalObject.path}}">
+        <button type='warn' >测一下</button>
+      </navigator>
+    </view>
+  </view>
+</view>
